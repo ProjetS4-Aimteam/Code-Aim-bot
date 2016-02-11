@@ -5,7 +5,7 @@
 int cmdLedRed = 0;
 
 int ledRed = LOW; 
-   
+float setPointSpeed = 0;
 
 int comm = 0;
 
@@ -14,7 +14,7 @@ int comm = 0;
 //Sending json String to RPI
 void updateState(){
   
-  state_msg["TestArduino"] = cmdLedRed;  
+  state_msg["setPointSpeed"] = setPointSpeed;  
 
   //Envoie de la commande en cours vers RPI
   send_state_data();

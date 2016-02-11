@@ -39,7 +39,7 @@ def updateState():
 
 #Function to send serial message 
 def send_msg(key,value):
-  data = {'key' :value}
+  data = {key :value}
   arduino.write(str(data).encode())
   rospy.loginfo(data)
 
