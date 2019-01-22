@@ -1,5 +1,5 @@
-function [Output] = PingpongForSimulink( x, xp, xpp, y, yp, ypp, thetaDegrees, Vi )
-if( nargin ~= 1 ) error( 'PingpongForSimulink expects 8 (not %d) command line arguments.', nargin ),  end
+function [Output] = PingpongForSimulink( x, xp, xpp, y, yp, ypp )
+if( nargin ~= 1 ) error( 'PingpongForSimulink expects 6 (not %d) command line arguments.', nargin ),  end
 %===========================================================================
 % File: PingpongForSimulink.m created Jan 22 2019 by MotionGenesis 5.9.
 % Portions copyright (c) 2009-2017 Motion Genesis LLC.  Rights reserved.
