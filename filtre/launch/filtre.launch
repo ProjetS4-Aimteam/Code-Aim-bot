@@ -1,0 +1,22 @@
+<launch>
+
+	<node pkg="depthimage_to_laserscan" name="depthimage_to_laserscan" type="depthimage_to_laserscan">
+		<remap from="image" to="camera/depth/image_raw" />
+		<remap from="scan" to="depth_scan" />
+		<param name="output_frame_id" value="camera_depth_frame" />
+		<param name="range_min" value="0.50" />
+		<param name="range_max" value="2.50" />
+		<param name="scan_height" value="5" />
+		<param name="scan_time" value="0.5" />
+	</node>
+
+	<include file="$(find freenect_launch)/launch/freenect.launch">
+	<arg name="rgb_processing"                  value="false" />
+	<arg name="ir_processing"                   value="false" />
+	<arg name="depth_processing"                value="true" />
+	<arg name="depth_registered_processing"     value="false" />
+	<arg name="disparity_processing"            value="false" />
+	<arg name="disparity_registered_processing" value="false" />
+	</include>
+
+</launch>
