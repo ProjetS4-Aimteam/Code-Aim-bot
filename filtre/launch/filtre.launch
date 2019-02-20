@@ -10,6 +10,12 @@
 		<param name="scan_time" value="0.5" />
 	</node>
 
+	<node pkg="filtre" name="target_filtre" type="target_filtre.py">
+	</node>
+
+	<node pkg="filtre" name="Launcher_control_Node" type="Launcher_control_Node.py">
+	</node>	
+
 	<include file="$(find freenect_launch)/launch/freenect.launch">
 	<arg name="rgb_processing"                  value="false" />
 	<arg name="ir_processing"                   value="false" />
