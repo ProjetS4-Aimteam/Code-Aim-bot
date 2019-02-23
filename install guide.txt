@@ -1,0 +1,62 @@
+*************************************
+Projet s4 - GRO - H19
+Last update:2019/02/23 - 14h03
+
+**************************************
+List of material:
+-raspberty pi (3 or 3b+)
+-Kinect (version)
+-open cr card (link)
+-pololu drive (#model)
+-pololo motor (#model)
+*************************************
+SETUP the hardware
+-mecanical parts**
+(link to the schema)
+-plug the motor to the drive
+-plug the drive to the opencr card
+-plug the openCR card to the rasbberry
+*************************************
+
+
+*****start of the ROS step********
+
+1- install Ros on a raspbery pi
+
+	1.1 - download the Ubiquity pi image"2019-02-19-ubiquity-xenial-lxde" from this link : https://downloads.ubiquityrobotics.com/pi.html
+	1.2 - Flash an sd car with the image (you can use Etcher for this. https://www.balena.io/etcher/ )
+	1.3 - put the sd card in the raspberry pi and power on.
+	1.4 - Username: ubuntu / Pw: ubuntu
+	1.5 - after booting, run this command "sudo systemctl disable magni-base" on terminal to disabled the Ubiquity startup scripts.
+
+2 - Setup your wifi connection on the pi
+	(be sure to have a internet conection befor next step)
+
+3 - install all the Ros packages needed
+	(all the comand for step 3 are run in the terminal. you can copy/past them witout the "  ")
+
+	3.1 - Update*?*
+		"sudo apt update"
+
+	3.2 - install freenect nodes and dependencies
+		"sudo apt install ros-kinetic-freenect-launch "
+
+	3.3 - install depthimage-to-laserscan node
+		"sudo apt install ros-kinetic-depthimage-to-laserscan"
+
+4 - Clone the git project
+
+	4.1 - Go to "/home/ubuntu/catkin_ws/src" and delete all the files in this folder
+	4.2 - Open a terminal from this place and clone the git rep
+		"git clone -b Develop https://github.com/ProjetS4-Aimteam/Code-Aim-bot.git"
+
+5 - Start all
+	5.1 - Go to "catkin_ws" folder and source your workspace
+		"source devel/setup.bash
+	5.2 - run the launch file
+		"roslaunch filtre filtre.launch"
+
+*****end of the ROS step********
+		
+	
+	
