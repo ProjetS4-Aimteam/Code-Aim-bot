@@ -1,0 +1,30 @@
+************Test the communication between RPI and Arduino******************
+
+*If the latest version of arduino is not yet installed on your RPI do step 1 to 3
+1- Sudo apt-get update
+2- Sudo apt-get upgrade
+3- Go to the link below to download the latest version of Arduino. Be sure to select the Linux ARM version
+Link: "https://www.arduino.cc/en/Main/Software"
+4- Extract the file you now have in download and paste them to "/home/ubuntu/"
+5- Go in the arduino file now extracted and double clic on "install.sh", confirm with "open in terminal". Arduino will now be installed.
+ 
+	Download needed librearies
+6- Open arduino from the new icon on your desktop, and go under sketch/include library/Manage Libraries,
+7- You can now Search for needed libraries and clic "install" to install them so you can use it in your arduino IDE.
+
+8- If SimpleTimer library is not available in Arduino library manager. In terminal, navigate to "/home/ubuntu/arduino-[your version number} /libraries" and type in the following command: 
+"sudo git clone -b master https://github.com/schinken/SimpleTimer"
+9- Now close and reopen your arduino IDE so the changes take effect
+
+	Run TestCodeArduino.ino
+10- Open file TestCommRPI_Arduino.ino under ""/home/ubuntu/catkin_ws/src/Code-Aim-bot/AimBot-SerialComm"
+11- Select your arduino type under "/Tools/Board"
+12- Select the serial port to communicate with your arduino under "/Tools/Port/" chose /dev/ttyUSB0
+13- Clic on the Upload button to flash your arduino.
+
+	Open RPI-SerialComm.py
+
+1- Launch program IDLE(using python3.5)
+2- Open file RPI-SerialComm.py under "/home/ubuntu/catkin_ws/src/Code-Aim-bot/AimBot-SerialComm/RPI-SerialComm.py"
+3- Change the port in program line 
+4- Clic on Run/Run Module.
