@@ -16,7 +16,6 @@ void updateState(){
   
   state_msg["TestArduino"] = cmdLedRed;  
 
-  
   //Envoie de la commande en cours vers RPI
   send_state_data();
   should_send_ = false;

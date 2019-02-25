@@ -47,10 +47,6 @@ void analyseMessage(JsonVariant msg){
       cmdLedRed = false;
     }
   }
-
-  
-
-  
 }
 
 
