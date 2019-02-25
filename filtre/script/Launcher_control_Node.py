@@ -20,7 +20,7 @@ Rho = 1.1123    # kg/m^3, Air density in Sherbrooke, 25C
 G = 9.806       # m/s^2, Gravitational acceleration
 Rb = 0.02       # m, Ball's radius
 Mb = 0.0027     # Kg, Ball's weight
-
+R = 0.054
 # Parameter
 Yi = 0.3        # m, Distance between Launcher and top of the glass
 Theta = 1.0472  # rad, Angle of launch
@@ -76,7 +76,7 @@ def send_msg(ini_speed):
 def callback(msg):
     pos = msg.data
     ini_spd = NR_Dyn(pos)
-    send_msg(ini_spd)
+    send_msg(ini_spd/R)
     #rospy.loginfo(ini_spd)
 
 def main():

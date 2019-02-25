@@ -11,7 +11,6 @@
 // Contrôle du temps
 bool    should_send_ ;        // Indique qu'on est prêt à transmettre l'état.
 SimpleTimer timer;                  // objet du chronomètre
- 
 
 // Message objects
 StaticJsonBuffer<500> jsonBuffer;
@@ -36,21 +35,13 @@ void analyseMessage(JsonVariant msg){
     // Condition d'erreur : On ignore.
     return;
   }
+
  
-  parse_msg =  msg["test"];
+  parse_msg =  msg["ini_spd"];
   if(parse_msg.success()){
-    String buff_str = msg["test"];
-    if (buff_str.equals("77")){
-      cmdLedRed = true;
-    }
-    if (buff_str.equals("55")){
-      cmdLedRed = false;
-    }
+    setPointSpeed = msg["ini_spd"];
+    
   }
-
-  
-
-  
 }
 
 

@@ -1,6 +1,9 @@
 import serial
 import time
 import json
+import rospy
+from std_msgs.msg import Float32
+import numpy as np
 
 #Defining the serial port and speed
 port = '/dev/ttyUSB0'
@@ -30,10 +33,10 @@ def sendMsg():
   data = {'key' :value}
   arduino.write(str(data).encode())
 
+#Main
 
-while True :
+rospy.init_
+:
   currentTime = time.time()
   updateState()
-  sendMsg()   
-  
-  time.sleep(0.15)
+  sendMsg()
