@@ -3,7 +3,7 @@ import time
 import json
 
 #Defining the serial port and speed
-port = '/dev/ttyACM0'
+port = '/dev/ttyUSB0'
 speed = 9600
 
 #If serial connection failed generate an error
