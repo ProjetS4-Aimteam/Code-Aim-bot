@@ -15,7 +15,7 @@ from std_msgs.msg import Float32
 import numpy as np
 
 #Defining the serial port and speed
-port = '/dev/ttyUSB0'
+port = '/dev/ttyACM0'
 speed = 9600
 
 #If serial connection failed generate an error

@@ -16,6 +16,9 @@
 	<node pkg="filtre" name="Launcher_control_Node" type="Launcher_control_Node.py">
 	</node>	
 
+	<node pkg="filtre" name="RPI-SerialCommNode" type="RPI-SerialCommNode.py">
+	</node>
+
 	<include file="$(find freenect_launch)/launch/freenect.launch">
 	<arg name="rgb_processing"                  value="false" />
 	<arg name="ir_processing"                   value="false" />
