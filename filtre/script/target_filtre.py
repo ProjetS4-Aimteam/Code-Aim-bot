@@ -47,7 +47,7 @@ def callback(data):
 	#rospy.loginfo(pos)
 
 def send_msg(center_distance):
-    pub = rospy.Publisher("cup_pos", Float32, queue_size=10)
+    pub = rospy.Publisher("cup_pos", Float32, queue_size=0)
     pub.publish(center_distance)
 		
 def main():

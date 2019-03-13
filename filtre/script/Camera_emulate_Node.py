@@ -16,7 +16,7 @@ import numpy as np
 # Parameter
 
 def send_msg(xpos):
-    pub = rospy.Publisher("cup_pos", Float32, queue_size=10)
+    pub = rospy.Publisher("cup_pos", Float32, queue_size=0)
     pub.publish(xpos)
     rospy.loginfo(' xpos =')
     rospy.loginfo(xpos)
@@ -25,7 +25,7 @@ def talker():
     xpos = 0
     rospy.init_node('Camera_emulate', anonymous=True)
     rospy.loginfo('Camera_emulate started')
-    rate = rospy.Rate(1)
+    rate = rospy.Rate(100)
     while not rospy.is_shutdown():
         if xpos >=3.6:
             xpos = 0

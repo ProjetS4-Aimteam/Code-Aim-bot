@@ -69,7 +69,7 @@ def Test_Dynamic():
     return
 
 def send_msg(ini_speed):
-    pub = rospy.Publisher("launch_parameter", Float32, queue_size=10)
+    pub = rospy.Publisher("launch_parameter", Float32, queue_size=0)
     pub.publish(ini_speed)
 
 

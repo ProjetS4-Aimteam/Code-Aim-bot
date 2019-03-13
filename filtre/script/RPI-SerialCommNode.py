@@ -12,11 +12,12 @@ import time
 import json
 import rospy
 from std_msgs.msg import Float32
+from std_msgs.msg import String
 import numpy as np
 
 #Defining the serial port and speed
-port = '/dev/ttyUSB0'
-speed = 9600
+port = '/dev/ttyACM0'
+speed = 115200
 
 #If serial connection failed generate an error
 try:
@@ -34,7 +35,8 @@ except Exception as e:
 #Function to read serial message from arduino
 def updateState():
   msgArduino = arduino.readline()
-  print(msgArduino)
+  send_msg_topic(msgArduino)
+ # rospy.loginfo(msgArduino)
   #TODO: ADD code to detect json key and value
 
 #Function to send serial message 
@@ -46,13 +48,24 @@ def send_msg(key,value):
 def callback(msg):
    ini_spd = msg.data
    send_msg('ini_spd',ini_spd)
+   send_msg_pi(ini_spd)
+   updateState()
+
+def send_msg_topic(msg_ardu):
+    pub1 = rospy.Publisher("Ardu", String, queue_size=0)
+    pub1.publish(msg_ardu)
+
+def send_msg_pi(msg_pi):
+    pub2 = rospy.Publisher("pi_msg", Float32, queue_size=0)
+    pub2.publish(msg_pi)
 
 
 #Main
 def main():
    rospy.init_node('Serial_comm')
    rospy.Subscriber("launch_parameter",Float32,callback)
-   #rate = rospy.Rate(1)
+  # rate = rospy.Rate(2)
+  # rate.sleep()
    rospy.spin()
    #while not rospy.is_shutdown():
       #updateState()
@@ -61,5 +74,3 @@ def main():
 
 if __name__ == '__main__':
    main()
-
-
