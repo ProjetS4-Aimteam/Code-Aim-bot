@@ -80,7 +80,7 @@ def callback(msg):
     #rospy.loginfo(ini_spd)
 
 def main():
-    Test_Dynamic()
+    #Test_Dynamic()
     rospy.init_node('Dynamic_controller', anonymous=True)
     rospy.Subscriber("cup_pos",Float32, callback)
     rospy.spin()

@@ -11,7 +11,13 @@
 	<node pkg="filtre" name="Launcher_control_Node" type="Launcher_control_Node.py">
 	</node>	
 
-	<node pkg="filtre" name="RPI-SerialComm" type="RPI-SerialCommNode.py">
+	<node pkg="filtre" name="UIEmulate" type="UIEmulate.py">
+	</node>	
+
+	<node pkg="filtre" name="dataManager" type="dataManager.py">
+	</node>	
+
+	<node pkg="filtre" name="RPISerialComm" type="RPISerialCommNode.py">
 	</node>	
 
 
