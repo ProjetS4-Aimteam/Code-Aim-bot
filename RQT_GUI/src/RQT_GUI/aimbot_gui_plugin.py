@@ -8,6 +8,7 @@ import subprocess
 from python_qt_binding import loadUi
 from PyQt5 import QtCore, QtGui, QtWidgets
 from std_msgs.msg import Float32
+from filtre.msg import UIParameter
 
 from .aimbot_gui import AimBotWidget
 
@@ -64,19 +65,54 @@ class AimBotPlugin(Plugin):
 class AimBotMain():
     def __init__(self):
         self.widget = AimBotWidget(self)
-        #self.mode = MANUAL
+        #self.manual_mode = False
+        self.UI_parameter = UIParameter()
         self.cup_pos_msg = rospy.Subscriber("cup_pos", Float32, self.cup_pos_callback)
-        #rospy.spin()
+        #self.UImsg = rospy.Subscriber("msgUIParameter",UIParameter, self.ui_callback)
+        self.UI_pub = rospy.Publisher("msgUIParameter",UIParameter, queue_size=0)
+        
 
     def get_widget(self):
         return self.widget
 
     def cup_pos_callback(self, data):
 	self.widget.update_cup_pos(data)
-   
+	
+     def launch_start(self)
+             self.UI_parameter.launch = True
+             self.UI_pub.publish(self.UI_parameter)
 
-   # def change_mode(self, mode):
-    #	self.mode = mode
+     def launch_stop(self)
+             self.UI_parameter.launch = False
+             self.UI_pub.publish(self.UI_parameter)
+
+    def change_mode(self, mode):
+                self.UI_parameter.mode = mode
+    	self.UI_pub.publish(self.UI_parameter)
+
+     def update_kp(self,kp):
+             self.UI_parameter.kp = kp
+             self.UI_pub.publish(self.UI_parameter)
+
+     def update_ki(self,ki):
+             self.UI_parameter.ki = ki
+             self.UI_pub.publish(self.UI_parameter)
+
+     def update_ki(self,ki):
+             self.UI_parameter.ki = ki
+             self.UI_pub.publish(self.UI_parameter)
+
+     def update_motor_speed(self,speed):
+             self.UI_parameter.motor_speed = speed
+             self.UI_pub.publish(self.UI_parameter)
+
+     def update_tilt(self,tilt):
+             self.UI_parameter.tilt_angle = tilt
+             self.UI_pub.publish(self.UI_parameter)
+
+     def update_pan(self,pan):
+             self.UI_parameter.pan_angle = pan
+             self.UI_pub.publish(self.UI_parameter)
 
 
 

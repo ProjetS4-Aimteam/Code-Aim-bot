@@ -25,15 +25,35 @@ class AimBotWidget(QtWidgets.QWidget):
         self.main = main
 
         self.CUP_POS.display(0)
-        self.verticalSlider.valueChanged[int].connect(self.test_txt_update)
-        self.label.setText(str(0))
-
+        self.Manual_control_check.stateChanged[int].connect(self.update_mode)
+        self.Launch_manual.clicked[bool].connect(self.launch)   #launch in Manual tab
+        self.Launch_Aimbot.clicked[bool].connect(self.launch)   #launch in Aimbot tab
+        self.tilt_angle.valueChanged[double].connect(self.update_tilt)
+        self.pan_angle.valueChanged[double].connect(self.update_pan)
+        self.motor_speed_man.valueChanged[double].connect(self.update_speed)    #Motor_speed in manual tab
+        self.motor_speed_pid.valueChanged[double].connect(self.update_speed)    #Motor_speed in pid tab
+        
     def update_cup_pos(self, msg):
         cup_pos = round(msg.data,3)
         self.CUP_POS.display(str(cup_pos))
 
-    def test_txt_update(self, value):
-        self.label.setText(str(value))
+    def update_mode(self, mode):
+        self.main.change_mode(mode)
+
+    def launch(self, state):
+        if state:
+            self.main.launch_start()
+        if not state:
+            self.main.launch_stop()
+
+    def update_tilt(self, value):
+            self.main.update_tilt(value)
+
+    def update_pan(self, value):
+            self.main.update_pan(value)
+
+    def update_speed(self, value):
+            self.main.update_motor_speed(value)
 
 """
         self.disable_btn.clicked[bool].connect(self.enable_motors_callback)
