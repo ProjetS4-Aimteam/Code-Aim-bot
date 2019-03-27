@@ -7,10 +7,10 @@
 		<param name="depth_img_row_step" value="1" />
 		<param name="range_min" value="0.50" />
 		<param name="range_max" value="2.50" />
-		<param name="scan_height" value = "10" />
-		<param name="scan_time" value="3" />
+		<param name="scan_height" value = "5" />
+		<param name="scan_time" value="10" />
 
-		<param name="ground_remove_en" value="1" />
+		<param name="ground_remove_en" value="0" />
 		<param name="range_min" value="0.50" />
 	</node>
 

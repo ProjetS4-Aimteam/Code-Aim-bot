@@ -74,17 +74,19 @@ def callback(data):
         left_boundary = int(mid_index -  (read_angle/2)/data.angle_increment) # data index to analyse from
         right_boundary = int(mid_index + (read_angle/2)/data.angle_increment) # data index to analyse to
         min_index = 0
-        data_avg(data.ranges)
+        #data_avg(data.ranges)
+        min_ = data.range_max
         for x in range(left_boundary, right_boundary):
-                min_ = data.range_max
                 if min_ > data.ranges[x]:
                         min_ = data.ranges[x]
                         min_index = x
-                cup_angle = data.angle_min + data.angle_increment*min_index
-                cup_distance = data.ranges[min_index] + front_offset + cup_radius + cheat_offset
-                Cup_pos.cup_angle = cup_angle*(180/3.141592)
-                Cup_pos.cup_distance = cup_distance
-        Cup_pos.cup_distance = len(data.ranges)       
+        assert min_index > 0, "Minimum wasnt found"
+        
+        cup_angle = data.angle_min + data.angle_increment*min_index
+        cup_distance = min_ + front_offset + cup_radius + cheat_offset
+        Cup_pos.cup_angle = cup_angle*(180/3.141592)
+        Cup_pos.cup_distance = cup_distance
+        #Cup_pos.cup_distance = left_boundary    #to see the length of data.ranges   
         send_msg(Cup_pos)
         rospy.loginfo(Cup_pos)
 
