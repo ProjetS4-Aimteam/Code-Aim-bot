@@ -26,12 +26,17 @@ class AimBotWidget(QtWidgets.QWidget):
 
         self.CUP_POS.display(0)
         self.Manual_control_check.stateChanged[int].connect(self.update_mode)
-        self.Launch_manual.clicked[bool].connect(self.launch)   #launch in Manual tab
-        self.Launch_Aimbot.clicked[bool].connect(self.launch)   #launch in Aimbot tab
-        self.tilt_angle.valueChanged[double].connect(self.update_tilt)
-        self.pan_angle.valueChanged[double].connect(self.update_pan)
-        self.motor_speed_man.valueChanged[double].connect(self.update_speed)    #Motor_speed in manual tab
-        self.motor_speed_pid.valueChanged[double].connect(self.update_speed)    #Motor_speed in pid tab
+        self.Launch_manual.pressed.connect(self.launch_start)   #launch in Manual tab
+        self.Launch_Aimbot.pressed.connect(self.launch_start)   #launch in Aimbot tab
+        self.Launch_manual.released.connect(self.launch_stop)   #launch in Manual tab
+        self.Launch_Aimbot.released.connect(self.launch_stop)   #launch in Aimbot tab
+        self.tilt_angle.valueChanged[float].connect(self.update_tilt)
+        self.pan_angle.valueChanged[float].connect(self.update_pan)
+        self.motor_speed_man.valueChanged[float].connect(self.update_speed)    #Motor_speed in manual tab
+        self.motor_speed_pid.valueChanged[float].connect(self.update_speed)    #Motor_speed in pid tab
+        self.kp.valueChanged[float].connect(self.update_kp)
+        self.ki.valueChanged[float].connect(self.update_ki)
+        self.kd.valueChanged[float].connect(self.update_kd)
         
     def update_cup_pos(self, msg):
         cup_pos = round(msg.data,3)
@@ -40,11 +45,11 @@ class AimBotWidget(QtWidgets.QWidget):
     def update_mode(self, mode):
         self.main.change_mode(mode)
 
-    def launch(self, state):
-        if state:
-            self.main.launch_start()
-        if not state:
-            self.main.launch_stop()
+    def launch_start(self):
+        self.main.launch_start()
+        
+    def launch_stop(self):
+        self.main.launch_stop()
 
     def update_tilt(self, value):
             self.main.update_tilt(value)
@@ -54,6 +59,15 @@ class AimBotWidget(QtWidgets.QWidget):
 
     def update_speed(self, value):
             self.main.update_motor_speed(value)
+
+    def update_kp(self, value):
+        self.main.update_kp(value)
+
+    def update_ki(self, value):
+        self.main.update_ki(value)
+
+    def update_kd(self, value):
+        self.main.update_kd(value)
 
 """
         self.disable_btn.clicked[bool].connect(self.enable_motors_callback)
