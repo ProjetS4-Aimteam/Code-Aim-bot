@@ -40,15 +40,24 @@ import rospy
 from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
 
-def callback(data):
-	
-	pos = data.ranges[320] 
-	send_msg(pos)
-	#rospy.loginfo(pos)
 
-def send_msg(center_distance):
+cup_radius = 0.045		#radius of a cup in m
+front_offset = 0.15	#distace betwen the zero of the kinect and the launcher
+cheat_offset = 0.00	#a positive or negative offset to tune the launcher
+
+def callback(data):
+        pos_raw = data.ranges[320] 
+        pos = pos_raw + front_offset + cup_radius + cheat_offset
+        send_msg(pos,pos_raw)
+        #rospy.loginfo(pos)
+
+
+def send_msg(center_distance, raw_distance):
+    pub1 = rospy.Publisher("raw_pos", Float32, queue_size=0)
     pub = rospy.Publisher("cup_pos", Float32, queue_size=0)
+    pub1.publish(raw_distance)
     pub.publish(center_distance)
+
 		
 def main():
 
