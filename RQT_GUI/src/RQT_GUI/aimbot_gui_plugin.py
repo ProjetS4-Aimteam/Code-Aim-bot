@@ -76,43 +76,43 @@ class AimBotMain():
         return self.widget
 
     def cup_pos_callback(self, data):
-	self.widget.update_cup_pos(data)
+        self.widget.update_cup_pos(data)
 	
-     def launch_start(self)
-             self.UI_parameter.launch = True
-             self.UI_pub.publish(self.UI_parameter)
+    def launch_start(self):
+        self.UI_parameter.launch = True
+        self.UI_pub.publish(self.UI_parameter)
 
-     def launch_stop(self)
-             self.UI_parameter.launch = False
-             self.UI_pub.publish(self.UI_parameter)
+    def launch_stop(self):
+        self.UI_parameter.launch = False
+        self.UI_pub.publish(self.UI_parameter)
 
     def change_mode(self, mode):
-                self.UI_parameter.mode = mode
-    	self.UI_pub.publish(self.UI_parameter)
+        self.UI_parameter.mode = mode
+        self.UI_pub.publish(self.UI_parameter)
 
-     def update_kp(self,kp):
-             self.UI_parameter.kp = kp
-             self.UI_pub.publish(self.UI_parameter)
+    def update_kp(self,kp):
+        self.UI_parameter.kpSpeed= kp
+        self.UI_pub.publish(self.UI_parameter)
 
-     def update_ki(self,ki):
-             self.UI_parameter.ki = ki
-             self.UI_pub.publish(self.UI_parameter)
+    def update_ki(self,ki):
+        self.UI_parameter.kiSpeed = ki
+        self.UI_pub.publish(self.UI_parameter)
 
-     def update_ki(self,ki):
-             self.UI_parameter.ki = ki
-             self.UI_pub.publish(self.UI_parameter)
+    def update_kd(self,kd):
+        self.UI_parameter.kdSpeed = kd
+        self.UI_pub.publish(self.UI_parameter)
 
-     def update_motor_speed(self,speed):
-             self.UI_parameter.motor_speed = speed
-             self.UI_pub.publish(self.UI_parameter)
+    def update_motor_speed(self,speed):
+        self.UI_parameter.motor_speed = speed
+        self.UI_pub.publish(self.UI_parameter)
 
-     def update_tilt(self,tilt):
-             self.UI_parameter.tilt_angle = tilt
-             self.UI_pub.publish(self.UI_parameter)
+    def update_tilt(self,tilt):
+        self.UI_parameter.tilt_angle = tilt
+        self.UI_pub.publish(self.UI_parameter)
 
-     def update_pan(self,pan):
-             self.UI_parameter.pan_angle = pan
-             self.UI_pub.publish(self.UI_parameter)
+    def update_pan(self,pan):
+        self.UI_parameter.pan_angle = pan
+        self.UI_pub.publish(self.UI_parameter)
 
 
 
