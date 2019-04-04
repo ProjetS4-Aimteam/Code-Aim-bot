@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(filtre)
 
+
+set(OpenCV_DIR /opt/ros/kinetic/include/opencv-3.3.1-dev)
+include_directories( ${OpenCV_DIR})
+
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -8,12 +13,17 @@ project(filtre)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
+  cv_bridge
+  roscpp
   rospy
   sensor_msgs
   std_msgs
   message_generation
 )
 
+find_package(OpenCV REQUIRED)
+
+# ${PROJECT_NAME}
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -39,7 +49,7 @@ find_package(catkin REQUIRED COMPONENTS
 ##     * add a exec_depend tag for "message_runtime"
 ## * In this file (CMakeLists.txt):
 ##   * add "message_generation" and every package in MSG_DEP_SET to
-##     find_package(catkin REQUIRED COMPONENTS ...)
+##     find_packa${PROJECT_NAME}ge(catkin REQUIRED COMPONENTS ...)
 ##   * add "message_runtime" and every package in MSG_DEP_SET to
 ##     catkin_package(CATKIN_DEPENDS ...)
 ##   * uncomment the add_*_files sections below as needed
@@ -53,6 +63,7 @@ find_package(catkin REQUIRED COMPONENTS
    toOpenCR.msg
    fromOpenCR.msg
    UIParameter.msg
+   cup_pos.msg
  )
 
 ## Generate services in the 'srv' folder
@@ -108,9 +119,10 @@ catkin_package(
   CATKIN_DEPENDS message_runtime
 #  INCLUDE_DIRS include
 #  LIBRARIES filtre
-#  CATKIN_DEPENDS rospy sensor_msgs std_msgs
+  CATKIN_DEPENDS rospy sensor_msgs std_msgs
 #  DEPENDS system_lib
 )
+
 
 ###########
 ## Build ##
@@ -120,6 +132,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 include_directories(
 # include
+  ${OpenCV_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -136,7 +149,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/filtre_node.cpp)
+ add_executable(${PROJECT_NAME}_node src/filtre_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -149,9 +162,10 @@ include_directories(
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(${PROJECT_NAME}_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(${PROJECT_NAME}_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBRARIES}
+ )
 
 #############
 ## Install ##

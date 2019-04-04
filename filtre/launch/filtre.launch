@@ -5,10 +5,13 @@
 		<remap from="image" to="camera/depth/image_raw" />
 		<remap from="scan" to="depth_scan" />
 		<param name="output_frame_id" value="camera_depth_frame" />
+		<param name="depth_img_row_step" value="1" />
 		<param name="range_min" value="0.50" />
 		<param name="range_max" value="2.50" />
-		<param name="scan_height" value="3" />
-		<param name="scan_time" value="1" />
+		<param name="scan_height" value = "5" />
+		<param name="scan_time" value="10" />
+		<param name="ground_remove_en" value="0" />
+		<param name="range_min" value="0.50" />
 	</node>
 
 	<node pkg="filtre" name="target_filtre" type="target_filtre.py">
@@ -16,6 +19,7 @@
 
 	<node pkg="filtre" name="Launcher_control_Node" type="Launcher_control_Node.py">
 	</node>	
+
 
 	<node pkg="filtre" name="dataManager" type="dataManager.py">
 	</node>	
