@@ -9,7 +9,6 @@
 		<param name="range_max" value="2.50" />
 		<param name="scan_height" value = "5" />
 		<param name="scan_time" value="10" />
-
 		<param name="ground_remove_en" value="0" />
 		<param name="range_min" value="0.50" />
 	</node>
@@ -19,9 +18,6 @@
 
 	<node pkg="filtre" name="Launcher_control_Node" type="Launcher_control_Node.py">
 	</node>	
-
-	<node pkg="filtre" name="RPI-SerialCommNode" type="RPI-SerialCommNode.py">
-	</node>
 
 	<include file="$(find freenect_launch)/launch/freenect.launch">
 	<arg name="rgb_processing"                  value="false" />

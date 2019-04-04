@@ -41,6 +41,8 @@ from sensor_msgs.msg import LaserScan
 from filtre.msg import cup_pos
 import numpy
 from collections import deque
+#import cv2
+#from disutils.version import LooseVersion
 
 class Simplemovingaverage():
     def __init__(self, period):
@@ -67,7 +69,8 @@ cup_radius = 0.045		#radius of a cup in m
 front_offset = 0.00	#distance between the zero of the kinect and the launcher
 cheat_offset = 0.00	#a positive or negative offset to tune the launcher
 Cup_pos = cup_pos()
-data_avg = Simplemovingaverage(10) #moving average of 10 data
+dist_avg = Simplemovingaverage(75) #moving average of 10 data
+angle_avg = Simplemovingaverage(75) #moving average of 10 data
 
 def callback(data):
         mid_index = len(data.ranges)/2-1 #center of the data array (640/2 by default)
@@ -83,7 +86,10 @@ def callback(data):
         assert min_index > 0, "Minimum wasnt found"
         
         cup_angle = data.angle_min + data.angle_increment*min_index
+        cup_angle = angle_avg(cup_angle)
         cup_distance = min_ + front_offset + cup_radius + cheat_offset
+        cup_distance = dist_avg(cup_distance)
+        
         Cup_pos.cup_angle = cup_angle*(180/3.141592)
         Cup_pos.cup_distance = cup_distance
         #Cup_pos.cup_distance = left_boundary    #to see the length of data.ranges   
@@ -92,7 +98,7 @@ def callback(data):
 
 def send_msg(Cup_pos):
 
-    pub = rospy.Publisher("cup_pos", cup_pos, queue_size=10)
+    pub = rospy.Publisher("cup_pos", cup_pos, queue_size=0)
     pub.publish(Cup_pos)
 		
 def main():
