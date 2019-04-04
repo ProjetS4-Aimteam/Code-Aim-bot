@@ -1,5 +1,6 @@
 <launch>
 
+
 	<node pkg="depthimage_to_laserscan" name="depthimage_to_laserscan" type="depthimage_to_laserscan">
 		<remap from="image" to="camera/depth/image_raw" />
 		<remap from="scan" to="depth_scan" />
@@ -19,6 +20,15 @@
 	<node pkg="filtre" name="Launcher_control_Node" type="Launcher_control_Node.py">
 	</node>	
 
+
+	<node pkg="filtre" name="dataManager" type="dataManager.py">
+	</node>	
+
+  <node pkg="rosserial_python" name="serialComm" type="serial_node.py">
+		<param name="port" value="/dev/ttyACM0"/>
+		<param name="baud" value="57600"/>
+	</node>	
+  
 	<include file="$(find freenect_launch)/launch/freenect.launch">
 	<arg name="rgb_processing"                  value="false" />
 	<arg name="ir_processing"                   value="false" />
@@ -27,5 +37,6 @@
 	<arg name="disparity_processing"            value="false" />
 	<arg name="disparity_registered_processing" value="false" />
 	</include>
+
 
 </launch>

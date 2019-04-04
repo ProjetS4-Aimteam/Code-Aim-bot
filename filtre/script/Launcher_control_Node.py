@@ -69,7 +69,7 @@ def Test_Dynamic():
     return
 
 def send_msg(ini_speed):
-    pub = rospy.Publisher("launch_parameter", Float32, queue_size=10)
+    pub = rospy.Publisher("launch_parameter", Float32, queue_size=0)
     pub.publish(ini_speed)
 
 
@@ -80,7 +80,7 @@ def callback(msg):
     #rospy.loginfo(ini_spd)
 
 def main():
-    Test_Dynamic()
+    #Test_Dynamic()
     rospy.init_node('Dynamic_controller', anonymous=True)
     rospy.Subscriber("cup_pos",Float32, callback)
     rospy.spin()
