@@ -30,7 +30,10 @@ SETUP the hardware
 	1.5 - after booting, run this command "sudo systemctl disable magni-base" on terminal to disabled the Ubiquity startup scripts.
 
 2 - Setup your wifi connection on the pi
-	(be sure to have a internet conection befor next step)
+	2.1 - (be sure to have a internet conection before next step)
+	2.2 - After you're connected, set your time zone properly
+		In menu under "System Tools/Time and Date" choose your time zone and select "keep synchronized with internet servers"
+		Reboot your system (From terminal) "reboot"
 
 3 - install all the Ros packages needed
 	(all the comand for step 3 are run in the terminal. you can copy/past them witout the "  ")
