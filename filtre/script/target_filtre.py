@@ -65,7 +65,6 @@ class Simplemovingaverage():
         return average
 
 read_angle = 20 * 3.141592 / 180 # read angle in radians
-
 cup_radius = 0.045		#radius of a cup in m
 front_offset = 0.00	#distance between the zero of the kinect and the launcher
 cheat_offset = 0.00	#a positive or negative offset to tune the launcher
@@ -74,7 +73,6 @@ dist_avg = Simplemovingaverage(75) #moving average of 10 data
 angle_avg = Simplemovingaverage(75) #moving average of 10 data
 
 def callback(data):
-
         mid_index = len(data.ranges)/2-1 #center of the data array (640/2 by default)
         left_boundary = int(mid_index -  (read_angle/2)/data.angle_increment) # data index to analyse from
         right_boundary = int(mid_index + (read_angle/2)/data.angle_increment) # data index to analyse to
@@ -102,7 +100,6 @@ def send_msg(Cup_pos):
 
     pub = rospy.Publisher("cup_pos", cup_pos, queue_size=0)
     pub.publish(Cup_pos)
-
 		
 def main():
 

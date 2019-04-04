@@ -9,6 +9,7 @@ from python_qt_binding import loadUi
 from PyQt5 import QtCore, QtGui, QtWidgets
 from std_msgs.msg import Float32
 from filtre.msg import UIParameter
+from filtre.msg import cup_pos
 
 from .aimbot_gui import AimBotWidget
 
@@ -67,7 +68,7 @@ class AimBotMain():
         self.widget = AimBotWidget(self)
         #self.manual_mode = False
         self.UI_parameter = UIParameter()
-        self.cup_pos_msg = rospy.Subscriber("cup_pos", Float32, self.cup_pos_callback)
+        self.cup_pos_msg = rospy.Subscriber("cup_pos", cup_pos, self.cup_pos_callback)
         #self.UImsg = rospy.Subscriber("msgUIParameter",UIParameter, self.ui_callback)
         self.UI_pub = rospy.Publisher("msgUIParameter",UIParameter, queue_size=0)
         

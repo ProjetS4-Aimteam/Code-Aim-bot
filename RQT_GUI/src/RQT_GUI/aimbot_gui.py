@@ -39,7 +39,7 @@ class AimBotWidget(QtWidgets.QWidget):
         self.kd.valueChanged[float].connect(self.update_kd)
         
     def update_cup_pos(self, msg):
-        cup_pos = round(msg.data,3)
+        cup_pos = round(msg.cup_distance,3)
         self.CUP_POS.display(str(cup_pos))
 
     def update_mode(self, mode):

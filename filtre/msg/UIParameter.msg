@@ -1,3 +1,14 @@
-float32 kp
-float32 ki
-float32 kd
+float32 kpSpeed
+float32 kiSpeed
+float32 kdSpeed
+float32 kpTilt
+float32 kiTilt
+float32 kdTilt
+float32 kpPan
+float32 kiPan
+float32 kdPan
+int32 mode
+bool launch
+float32 motor_speed
+float32 tilt_angle
+float32 pan_angle

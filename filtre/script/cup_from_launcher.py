@@ -45,7 +45,7 @@ from collections import deque
 #from disutils.version import LooseVersion
 
 
-Cup_pos = cup_pos()
+Cup_from_launcher = cup_pos()
 
 def callback(data):
         assert min_index > 0, "Minimum wasnt found"
@@ -53,19 +53,19 @@ def callback(data):
         cup_angle = angle_avg(cup_angle)
         cup_distance = dist_avg(cup_distance)
         
-        Cup_pos.cup_angle = cup_angle*(180/3.141592)
-        Cup_pos.cup_distance = cup_distance
-        #Cup_pos.cup_distance = left_boundary    #to see the length of data.ranges   
-        send_msg(Cup_pos)
-        rospy.loginfo(Cup_pos)
+        Cup_from_launcher.cup_angle = cup_angle*(180/3.141592)
+        Cup_from_launcher.cup_distance = cup_distance
+        #Cup_from_launcher.cup_distance = left_boundary    #to see the length of data.ranges   
+        send_msg(Cup_from_launcher)
+        rospy.loginfo(Cup_from_launcher)
 
 def send_msg(Cup_pos):
 
-    pub = rospy.Publisher("cup_pos", cup_pos, queue_size=10)
-    pub.publish(Cup_pos)
+    pub = rospy.Publisher("cup_from_launcher", cup_from_launcher, queue_size=0)
+    pub.publish(Cup_from_launcher)
 		
 def main():
-	rospy.init_node('shot_target', anonymous=True)
+	rospy.init_node('cup_from_launcher', anonymous=True)
 	rospy.Subscriber('cup_pos', cup_pos, callback)
 	rospy.spin()
 
