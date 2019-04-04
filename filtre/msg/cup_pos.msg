@@ -1,0 +1,2 @@
+float32 cup_distance
+float32 cup_angle
