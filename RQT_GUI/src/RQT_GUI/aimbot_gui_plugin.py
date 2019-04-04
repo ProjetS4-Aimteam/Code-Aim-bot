@@ -12,6 +12,7 @@ from filtre.msg import UIParameter
 from filtre.msg import cup_pos
 
 from .aimbot_gui import AimBotWidget
+from .Plotter import CustomWidget
 
 class AimBotPlugin(Plugin):
     """

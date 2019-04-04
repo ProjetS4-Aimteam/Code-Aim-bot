@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -241,10 +241,10 @@
        <number>0</number>
       </property>
       <property name="minimum">
-       <double>0.000000000000000</double>
+       <double>30.000000000000000</double>
       </property>
       <property name="maximum">
-       <double>52.000000000000000</double>
+       <double>80.000000000000000</double>
       </property>
       <property name="value">
        <double>45.000000000000000</double>
@@ -560,7 +560,7 @@
        <double>0.000000000000000</double>
       </property>
      </widget>
-     <widget class="QWidget" name="pid_graph" native="true">
+     <widget class="CustomWidget" name="pid_graph" native="true">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -664,6 +664,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CustomWidget</class>
+   <extends>QWidget</extends>
+   <header>Plotter.py</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
