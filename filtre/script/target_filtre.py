@@ -71,6 +71,7 @@ cheat_offset = 0.00	#a positive or negative offset to tune the launcher
 Cup_pos = cup_pos()
 dist_avg = Simplemovingaverage(75) #moving average of 10 data
 angle_avg = Simplemovingaverage(75) #moving average of 10 data
+dist_kinect_robot = 0.20 #distance from the robot to the kinect in cm
 
 def callback(data):
         mid_index = len(data.ranges)/2-1 #center of the data array (640/2 by default)
@@ -83,18 +84,33 @@ def callback(data):
                 if min_ > data.ranges[x]:
                         min_ = data.ranges[x]
                         min_index = x
-        assert min_index > 0, "Minimum wasnt found"
+        assert min_index > 0, "Cup not found"
         
         cup_angle = data.angle_min + data.angle_increment*min_index
         cup_angle = angle_avg(cup_angle)
         cup_distance = min_ + front_offset + cup_radius + cheat_offset
         cup_distance = dist_avg(cup_distance)
         
-        Cup_pos.cup_angle = cup_angle*(180/3.141592)
-        Cup_pos.cup_distance = cup_distance
-        #Cup_pos.cup_distance = left_boundary    #to see the length of data.ranges   
+        #Cup_pos.cup_distance = left_boundary    #to see the length of data.ranges
+
+        cup_from_kinect_deg = cup_angle*(180/numpy.pi) 
+        rospy.loginfo("Cup_pos from kinect")
+        rospy.loginfo(cup_distance)
+        rospy.loginfo(cup_from_kinect_deg)
+        
+        Cup_pos.cup_distance = numpy.sqrt((cup_distance*numpy.sin(cup_angle))**2 + (dist_kinect_robot+cup_distance*numpy.cos(cup_angle))**2)
+        cup_angle = numpy.arctan((cup_distance*numpy.sin(cup_angle))/(dist_kinect_robot+cup_distance*numpy.cos(cup_angle)))
+
+        Cup_pos.cup_angle = cup_angle*(180/numpy.pi)
+
+        rospy.loginfo("Cup_pos from robot")
+        rospy.loginfo(Cup_pos.cup_distance)
+        rospy.loginfo(Cup_pos.cup_angle)
+        
+        
         send_msg(Cup_pos)
-        rospy.loginfo(Cup_pos)
+        
+
 
 def send_msg(Cup_pos):
 
