@@ -103,6 +103,30 @@ class AimBotMain():
         self.UI_parameter.kdSpeed = kd
         self.UI_pub.publish(self.UI_parameter)
 
+    def update_kpTilt(self,kp):
+        self.UI_parameter.kpTilt= kp
+        self.UI_pub.publish(self.UI_parameter)
+
+    def update_kiTilt(self,ki):
+        self.UI_parameter.kiTilt = ki
+        self.UI_pub.publish(self.UI_parameter)
+
+    def update_kdTilt(self,kd):
+        self.UI_parameter.kdTilt = kd
+        self.UI_pub.publish(self.UI_parameter)
+
+    def update_kpPan(self,kp):
+        self.UI_parameter.kpPan= kp
+        self.UI_pub.publish(self.UI_parameter)
+
+    def update_kiPan(self,ki):
+        self.UI_parameter.kiPan = ki
+        self.UI_pub.publish(self.UI_parameter)
+
+    def update_kdPan(self,kd):
+        self.UI_parameter.kdPan = kd
+        self.UI_pub.publish(self.UI_parameter)
+
     def update_motor_speed(self,speed):
         self.UI_parameter.motor_speed = speed
         self.UI_pub.publish(self.UI_parameter)

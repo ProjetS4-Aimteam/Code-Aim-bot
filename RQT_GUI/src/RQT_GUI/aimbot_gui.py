@@ -34,13 +34,21 @@ class AimBotWidget(QtWidgets.QWidget):
         self.pan_angle.valueChanged[float].connect(self.update_pan)
         self.motor_speed_man.valueChanged[float].connect(self.update_speed)    #Motor_speed in manual tab
         self.motor_speed_pid.valueChanged[float].connect(self.update_speed)    #Motor_speed in pid tab
-        self.kp.valueChanged[float].connect(self.update_kp)
-        self.ki.valueChanged[float].connect(self.update_ki)
-        self.kd.valueChanged[float].connect(self.update_kd)
+        self.kpSpeed.valueChanged[float].connect(self.update_kp)
+        self.kiSpeed.valueChanged[float].connect(self.update_ki)
+        self.kdSpeed.valueChanged[float].connect(self.update_kd)
+        self.kpTilt.valueChanged[float].connect(self.update_kpTilt)
+        self.kiTilt.valueChanged[float].connect(self.update_kiTilt)
+        self.kdTilt.valueChanged[float].connect(self.update_kdTilt)
+        self.kpPan.valueChanged[float].connect(self.update_kpPan)
+        self.kiPan.valueChanged[float].connect(self.update_kiPan)
+        self.kdPan.valueChanged[float].connect(self.update_kdPan)
         
     def update_cup_pos(self, msg):
         cup_pos = round(msg.cup_distance,3)
+        cup_angle = round(msg.cup_angle,3)
         self.CUP_POS.display(str(cup_pos))
+        self.CUP_POS_ANGLE.display(str(cup_angle))
 
     def update_mode(self, mode):
         self.main.change_mode(mode)
@@ -59,7 +67,8 @@ class AimBotWidget(QtWidgets.QWidget):
 
     def update_speed(self, value):
             self.main.update_motor_speed(value)
-
+         
+    #PID SPEED
     def update_kp(self, value):
         self.main.update_kp(value)
 
@@ -68,63 +77,24 @@ class AimBotWidget(QtWidgets.QWidget):
 
     def update_kd(self, value):
         self.main.update_kd(value)
-
-"""
-        self.disable_btn.clicked[bool].connect(self.enable_motors_callback)
-        self.auto_btn.clicked[bool].connect(lambda: self.change_mode(AUTO))
-        self.track_btn.clicked[bool].connect(self.track_face_callback)
-        self.home_btn.clicked[bool].connect(self.home_callback)
-
-        self.yaw_slider.valueChanged[int].connect(self.slider_callback_yaw)
-        self.pitch_slider.valueChanged[int].connect(self.slider_callback_pitch)
-        self.roll_slider.valueChanged[int].connect(self.slider_callback_roll)
         
-        self.val_yaw.setText(str(0))
-        self.val_pitch.setText(str(0)) 
-        self.val_roll.setText(str(0))
+    #PID TILT
+    def update_kpTilt(self, value):
+        self.main.update_kpTilt(value)
 
-    def update_motors(self, angles):
-        self.val_yaw.setText(str(angles[0]))
-        self.val_pitch.setText(str(angles[1])) 
-        self.val_roll.setText(str(angles[2]))
-        
-    def home_callback(self):
-        self.change_mode(MANUAL)
-        self.main.go_home()
-        self.yaw_slider.setValue(50)
-        self.pitch_slider.setValue(50)
-        self.roll_slider.setValue(50)
+    def update_kiTilt(self, value):
+        self.main.update_kiTilt(value)
 
-    def change_mode(self, mode):
-        if mode == MANUAL:
-            self.auto_btn.setEnabled(True)
-            
-        if mode == AUTO:
-            self.auto_btn.setEnabled(False)
-        self.main.change_mode(mode)
- 
-    def enable_motors_callback(self, enable):
-        if self.disable_btn.text() == "Enable":
-            self.main.enable_motors(True)
-            self.disable_btn.setText("Disable")
+    def update_kdTilt(self, value):
+        self.main.update_kdTilt(value)
 
-        elif self.disable_btn.text() == "Disable":
-            self.main.enable_motors(False)
-            self.disable_btn.setText("Enable")
+    #PID PAN
+    def update_kpPan(self, value):
+        self.main.update_kpPan(value)
 
-    def track_face_callback(self):
-        pass
-    
-    def slider_callback_yaw(self, value):
-        self.change_mode(MANUAL)
-        self.main.move_axis(1, value-50, [-50, 50])    
+    def update_kiPan(self, value):
+        self.main.update_kiPan(value)
 
-    def slider_callback_pitch(self, value):
-        self.change_mode(MANUAL)
-        self.main.move_axis(2, value-50, [-50, 50])  
+    def update_kdPan(self, value):
+        self.main.update_kdPan(value)
 
-    def slider_callback_roll(self, value):
-        self.change_mode(MANUAL)
-        self.main.move_axis(3, value-50, [-50, 50])   
-
-"""

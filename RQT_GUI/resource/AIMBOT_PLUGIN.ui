@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -33,16 +33,16 @@
      <widget class="QPushButton" name="Launch_Aimbot">
       <property name="geometry">
        <rect>
-        <x>430</x>
-        <y>200</y>
-        <width>171</width>
-        <height>51</height>
+        <x>310</x>
+        <y>70</y>
+        <width>271</width>
+        <height>131</height>
        </rect>
       </property>
       <property name="font">
        <font>
         <family>Eras Bold ITC</family>
-        <pointsize>12</pointsize>
+        <pointsize>24</pointsize>
         <weight>50</weight>
         <bold>false</bold>
        </font>
@@ -54,47 +54,10 @@
        <string>LAUNCH</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="glass_list">
-      <property name="geometry">
-       <rect>
-        <x>430</x>
-        <y>141</y>
-        <width>171</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_7">
-      <property name="geometry">
-       <rect>
-        <x>480</x>
-        <y>115</y>
-        <width>81</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>GLASS</string>
-      </property>
-     </widget>
      <widget class="QLCDNumber" name="CUP_POS">
       <property name="geometry">
        <rect>
-        <x>430</x>
+        <x>50</x>
         <y>70</y>
         <width>171</width>
         <height>31</height>
@@ -104,9 +67,9 @@
      <widget class="QLabel" name="label_8">
       <property name="geometry">
        <rect>
-        <x>480</x>
+        <x>50</x>
         <y>50</y>
-        <width>81</width>
+        <width>171</width>
         <height>21</height>
        </rect>
       </property>
@@ -118,17 +81,37 @@
        </font>
       </property>
       <property name="text">
-       <string>CUP_POS</string>
+       <string>GLASS POSITION</string>
       </property>
      </widget>
-     <widget class="QWidget" name="glass_graph" native="true">
+     <widget class="QLCDNumber" name="CUP_POS_ANGLE">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>30</y>
-        <width>351</width>
-        <height>211</height>
+        <x>50</x>
+        <y>170</y>
+        <width>171</width>
+        <height>31</height>
        </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_23">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>150</y>
+        <width>171</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>GLASS ANGLE</string>
       </property>
      </widget>
     </widget>
@@ -165,7 +148,7 @@
         <x>20</x>
         <y>60</y>
         <width>151</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -205,7 +188,7 @@
         <x>20</x>
         <y>180</y>
         <width>151</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -222,7 +205,7 @@
      <widget class="QDoubleSpinBox" name="tilt_angle">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>150</x>
         <y>70</y>
         <width>101</width>
         <height>21</height>
@@ -253,7 +236,7 @@
      <widget class="QDoubleSpinBox" name="pan_angle">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>150</x>
         <y>130</y>
         <width>101</width>
         <height>21</height>
@@ -272,7 +255,7 @@
        <number>0</number>
       </property>
       <property name="minimum">
-       <double>-31.000000000000000</double>
+       <double>-30.000000000000000</double>
       </property>
       <property name="maximum">
        <double>30.000000000000000</double>
@@ -284,7 +267,7 @@
      <widget class="QDoubleSpinBox" name="motor_speed_man">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>150</x>
         <y>190</y>
         <width>101</width>
         <height>21</height>
@@ -315,7 +298,7 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>250</x>
         <y>190</y>
         <width>47</width>
         <height>21</height>
@@ -334,7 +317,7 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>250</x>
         <y>130</y>
         <width>47</width>
         <height>21</height>
@@ -353,7 +336,7 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>250</x>
         <y>70</y>
         <width>47</width>
         <height>21</height>
@@ -401,10 +384,10 @@
      <widget class="QLabel" name="label_9">
       <property name="geometry">
        <rect>
-        <x>500</x>
-        <y>30</y>
+        <x>20</x>
+        <y>70</y>
         <width>31</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -421,10 +404,10 @@
      <widget class="QLabel" name="label_10">
       <property name="geometry">
        <rect>
-        <x>500</x>
-        <y>110</y>
+        <x>20</x>
+        <y>140</y>
         <width>31</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -441,10 +424,10 @@
      <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
-        <x>500</x>
-        <y>180</y>
+        <x>20</x>
+        <y>220</y>
         <width>31</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -458,11 +441,11 @@
        <string>KD</string>
       </property>
      </widget>
-     <widget class="QDoubleSpinBox" name="kp">
+     <widget class="QDoubleSpinBox" name="kpSpeed">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>40</y>
+        <x>50</x>
+        <y>80</y>
         <width>101</width>
         <height>21</height>
        </rect>
@@ -492,11 +475,11 @@
        <double>0.000000000000000</double>
       </property>
      </widget>
-     <widget class="QDoubleSpinBox" name="ki">
+     <widget class="QDoubleSpinBox" name="kiSpeed">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>120</y>
+        <x>50</x>
+        <y>150</y>
         <width>101</width>
         <height>21</height>
        </rect>
@@ -526,11 +509,11 @@
        <double>0.000000000000000</double>
       </property>
      </widget>
-     <widget class="QDoubleSpinBox" name="kd">
+     <widget class="QDoubleSpinBox" name="kdSpeed">
       <property name="geometry">
        <rect>
-        <x>530</x>
-        <y>190</y>
+        <x>50</x>
+        <y>230</y>
         <width>101</width>
         <height>21</height>
        </rect>
@@ -558,16 +541,6 @@
       </property>
       <property name="value">
        <double>0.000000000000000</double>
-      </property>
-     </widget>
-     <widget class="QWidget" name="pid_graph" native="true">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>40</y>
-        <width>441</width>
-        <height>211</height>
-       </rect>
       </property>
      </widget>
      <widget class="QDoubleSpinBox" name="motor_speed_pid">
@@ -607,7 +580,7 @@
         <x>230</x>
         <y>0</y>
         <width>151</width>
-        <height>31</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="font">
@@ -638,6 +611,390 @@
       </property>
       <property name="text">
        <string> RPM</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="kiTilt">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>150</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>70</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>KP</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>220</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>KD</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="kdTilt">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>230</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="kpTilt">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>80</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>140</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>KI</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="kiPan">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>150</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>70</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>KP</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>220</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>KD</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="kdPan">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>230</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="kpPan">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>80</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="decimals">
+       <number>1</number>
+      </property>
+      <property name="minimum">
+       <double>0.000000000000000</double>
+      </property>
+      <property name="maximum">
+       <double>50.000000000000000</double>
+      </property>
+      <property name="singleStep">
+       <double>0.100000000000000</double>
+      </property>
+      <property name="value">
+       <double>0.000000000000000</double>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>140</y>
+        <width>31</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>KI</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>SPEED</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_21">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>TILT</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>40</y>
+        <width>81</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>PAN</string>
       </property>
      </widget>
     </widget>
