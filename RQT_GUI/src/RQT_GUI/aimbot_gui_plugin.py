@@ -71,7 +71,7 @@ class AimBotMain():
         self.cup_pos_msg = rospy.Subscriber("cup_pos", cup_pos, self.cup_pos_callback)
         #self.UImsg = rospy.Subscriber("msgUIParameter",UIParameter, self.ui_callback)
         self.UI_pub = rospy.Publisher("msgUIParameter",UIParameter, queue_size=0)
-        
+	self.height_pub = rospy.Publisher("cup_height", Float32, queue_size = 0)
 
     def get_widget(self):
         return self.widget
@@ -138,6 +138,9 @@ class AimBotMain():
     def update_pan(self,pan):
         self.UI_parameter.pan_angle = pan
         self.UI_pub.publish(self.UI_parameter)
+
+    def update_height(self, glass_height):
+	self.height_pub.publish(glass_height)
 
 
 
