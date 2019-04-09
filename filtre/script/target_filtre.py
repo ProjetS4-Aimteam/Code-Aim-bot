@@ -37,25 +37,85 @@
 ## to the 'chatter' topic
 
 import rospy
-from std_msgs.msg import Float32
 from sensor_msgs.msg import LaserScan
+from filtre.msg import cup_pos
+import numpy
+from collections import deque
+#import cv2
+#from disutils.version import LooseVersion
 
+class Simplemovingaverage():
+    def __init__(self, period):
+        assert period == int(period) and period > 0, "Period must be an integer >0"
+        self.period = period
+        self.stream = deque()
+ 
+    def __call__(self, n):
+        stream = self.stream
+        stream.append(n)    # appends on the right
+        streamlength = len(stream)
+        if streamlength > self.period:
+            stream.popleft()
+            streamlength -= 1
+        if streamlength == 0:
+            average = 0
+        else:
+            average = sum( stream ) / streamlength
+ 
+        return average
+
+read_angle = 20 * 3.141592 / 180 # read angle in radians
 cup_radius = 0.045		#radius of a cup in m
-front_offset = 0.15	#distace betwen the zero of the kinect and the launcher
+front_offset = 0.00	#distance between the zero of the kinect and the launcher
 cheat_offset = 0.00	#a positive or negative offset to tune the launcher
+Cup_pos = cup_pos()
+dist_avg = Simplemovingaverage(75) #moving average of 10 data
+angle_avg = Simplemovingaverage(75) #moving average of 10 data
+dist_kinect_robot = 0.20 #distance from the robot to the kinect in cm
 
 def callback(data):
-	
-	pos_raw = data.ranges[320] 
-	pos = pos_raw + front_offset + cup_radius + cheat_offset
-	send_msg(pos,pos_raw)
-	#rospy.loginfo(pos)
+        mid_index = len(data.ranges)/2-1 #center of the data array (640/2 by default)
+        left_boundary = int(mid_index -  (read_angle/2)/data.angle_increment) # data index to analyse from
+        right_boundary = int(mid_index + (read_angle/2)/data.angle_increment) # data index to analyse to
+        min_index = 0
+        #data_avg(data.ranges)
+        min_ = data.range_max
+        for x in range(left_boundary, right_boundary):
+                if min_ > data.ranges[x]:
+                        min_ = data.ranges[x]
+                        min_index = x
+        assert min_index > 0, "Cup not found"
+        
+        cup_angle = data.angle_min + data.angle_increment*min_index
+        cup_angle = angle_avg(cup_angle)
+        cup_distance = min_ + front_offset + cup_radius + cheat_offset
+        cup_distance = dist_avg(cup_distance)
+        
+        #Cup_pos.cup_distance = left_boundary    #to see the length of data.ranges
 
-def send_msg(center_distance, raw_distance):
-    pub1 = rospy.Publisher("raw_pos", Float32, queue_size=10)
-    pub = rospy.Publisher("cup_pos", Float32, queue_size=0)
-    pub1.publish(raw_distance)
-    pub.publish(center_distance)
+        cup_from_kinect_deg = cup_angle*(180/numpy.pi) 
+        rospy.loginfo("Cup_pos from kinect")
+        rospy.loginfo(cup_distance)
+        rospy.loginfo(cup_from_kinect_deg)
+        
+        Cup_pos.cup_distance = numpy.sqrt((cup_distance*numpy.sin(cup_angle))**2 + (dist_kinect_robot+cup_distance*numpy.cos(cup_angle))**2)
+        cup_angle = numpy.arctan((cup_distance*numpy.sin(cup_angle))/(dist_kinect_robot+cup_distance*numpy.cos(cup_angle)))
+
+        Cup_pos.cup_angle = cup_angle*(180/numpy.pi)
+
+        rospy.loginfo("Cup_pos from robot")
+        rospy.loginfo(Cup_pos.cup_distance)
+        rospy.loginfo(Cup_pos.cup_angle)
+        
+        
+        send_msg(Cup_pos)
+        
+
+
+def send_msg(Cup_pos):
+
+    pub = rospy.Publisher("cup_pos", cup_pos, queue_size=0)
+    pub.publish(Cup_pos)
 		
 def main():
 

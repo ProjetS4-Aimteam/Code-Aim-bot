@@ -1,0 +1,12 @@
+    
+<library path="src">
+<!-- type=ros package, filename, className -->
+  <class name="AimBotPlugin" type="RQT_GUI.aimbot_gui_plugin.AimBotPlugin" base_class_type="rqt_gui_py::Plugin">
+    <description>
+      Interface for Beer pong Aimbot
+    </description>
+    <qtgui>
+      <label>AimBot_Control</label>
+    </qtgui>
+  </class>
+</library>
