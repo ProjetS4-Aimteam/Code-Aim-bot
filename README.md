@@ -12,7 +12,7 @@ Olivier Julien - julo2201@usherbrooke.ca
 Marie Lepage - lepm3403@usherbrooke.ca
 
 ****************************************************
-Here is the model on wich Aim-Team inspired their organisation of the git-hub
+Here is the model on which Aim-Team inspired their organisation of the git-hub
 
 https://nvie.com/posts/a-successful-git-branching-model/?fbclid=IwAR1rSR_AVfaEt_Q2J3Q7eqQch-DyzXOe0ktC13Q3V-zjGCxwdRJ6BQ8a5O0
 
