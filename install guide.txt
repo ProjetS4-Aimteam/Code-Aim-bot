@@ -46,8 +46,12 @@ SETUP the hardware
 
 	3.3 - install depthimage-to-laserscan node
 		"sudo apt install ros-kinetic-depthimage-to-laserscan"
+		
 	3.4 - install rosserial
 		"sudo apt-get install ros-kinetic-rosserial"
+		
+	3.5 - install pyqtgraph
+		"pip install python-pyqtgraph"
 
 
 4 - Clone the git project
