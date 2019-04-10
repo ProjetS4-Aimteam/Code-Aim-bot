@@ -69,8 +69,8 @@ cup_radius = 0.045		#radius of a cup in m
 front_offset = 0.00	#distance between the zero of the kinect and the launcher
 cheat_offset = 0.00	#a positive or negative offset to tune the launcher
 Cup_pos = cup_pos()
-dist_avg = Simplemovingaverage(75) #moving average of 10 data
-angle_avg = Simplemovingaverage(75) #moving average of 10 data
+dist_avg = Simplemovingaverage(70) #moving average of 10 data
+angle_avg = Simplemovingaverage(35) #moving average of 10 data
 dist_kinect_robot = 0.20 #distance from the robot to the kinect in cm
 
 def callback(data):
@@ -94,18 +94,18 @@ def callback(data):
         #Cup_pos.cup_distance = left_boundary    #to see the length of data.ranges
 
         cup_from_kinect_deg = cup_angle*(180/numpy.pi) 
-        rospy.loginfo("Cup_pos from kinect")
-        rospy.loginfo(cup_distance)
-        rospy.loginfo(cup_from_kinect_deg)
+        #rospy.loginfo("Cup_pos from kinect")
+        #rospy.loginfo(cup_distance)
+        #rospy.loginfo(cup_from_kinect_deg)
         
         Cup_pos.cup_distance = numpy.sqrt((cup_distance*numpy.sin(cup_angle))**2 + (dist_kinect_robot+cup_distance*numpy.cos(cup_angle))**2)
         cup_angle = numpy.arctan((cup_distance*numpy.sin(cup_angle))/(dist_kinect_robot+cup_distance*numpy.cos(cup_angle)))
 
         Cup_pos.cup_angle = cup_angle*(180/numpy.pi)
 
-        rospy.loginfo("Cup_pos from robot")
-        rospy.loginfo(Cup_pos.cup_distance)
-        rospy.loginfo(Cup_pos.cup_angle)
+        #rospy.loginfo("Cup_pos from robot")
+        #rospy.loginfo(Cup_pos.cup_distance)
+        #rospy.loginfo(Cup_pos.cup_angle)
         
         
         send_msg(Cup_pos)

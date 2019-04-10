@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -192,29 +192,6 @@
      <attribute name="title">
       <string>Manual Control</string>
      </attribute>
-     <widget class="QCheckBox" name="Manual_control_check">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>211</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Manual Control</string>
-      </property>
-      <property name="checked">
-       <bool>false</bool>
-      </property>
-     </widget>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
@@ -294,13 +271,13 @@
        </font>
       </property>
       <property name="decimals">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="minimum">
        <double>0.000000000000000</double>
       </property>
       <property name="maximum">
-       <double>52.000000000000000</double>
+       <double>75.000000000000000</double>
       </property>
       <property name="value">
        <double>45.000000000000000</double>
@@ -325,13 +302,13 @@
        </font>
       </property>
       <property name="decimals">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="minimum">
        <double>-30.000000000000000</double>
       </property>
       <property name="maximum">
-       <double>30.000000000000000</double>
+       <double>45.000000000000000</double>
       </property>
       <property name="value">
        <double>0.000000000000000</double>
@@ -449,6 +426,38 @@
        <string>LAUNCH</string>
       </property>
      </widget>
+     <widget class="QComboBox" name="Mode">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>211</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>STOP</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>MANUAL</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AUTO</string>
+       </property>
+      </item>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -533,7 +542,7 @@
        </font>
       </property>
       <property name="decimals">
-       <number>1</number>
+       <number>2</number>
       </property>
       <property name="minimum">
        <double>0.000000000000000</double>
@@ -545,7 +554,7 @@
        <double>0.100000000000000</double>
       </property>
       <property name="value">
-       <double>0.000000000000000</double>
+       <double>0.500000000000000</double>
       </property>
      </widget>
      <widget class="QDoubleSpinBox" name="kiSpeed">
@@ -567,7 +576,7 @@
        </font>
       </property>
       <property name="decimals">
-       <number>1</number>
+       <number>2</number>
       </property>
       <property name="minimum">
        <double>0.000000000000000</double>
@@ -579,7 +588,7 @@
        <double>0.100000000000000</double>
       </property>
       <property name="value">
-       <double>0.000000000000000</double>
+       <double>0.200000000000000</double>
       </property>
      </widget>
      <widget class="QDoubleSpinBox" name="kdSpeed">
@@ -601,7 +610,7 @@
        </font>
       </property>
       <property name="decimals">
-       <number>1</number>
+       <number>2</number>
       </property>
       <property name="minimum">
        <double>0.000000000000000</double>

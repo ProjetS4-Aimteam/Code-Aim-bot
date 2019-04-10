@@ -78,6 +78,8 @@ class AimBotMain():
 
     def cup_pos_callback(self, data):
         self.widget.update_cup_pos(data)
+	if (self.UI_parameter.mode == 2):
+		self.update_pan(data.cup_angle)
 	
     def launch_start(self):
         self.UI_parameter.launch = True
