@@ -30,4 +30,6 @@ Some information nice to know before starting the project
 
  - For all parts needed, you can go into the repository Hardware-Aim-bot of the user Aim-Team.
  
+ - User guide can be found at the end of the "install guide.txt".
+ 
  ****************************************************
