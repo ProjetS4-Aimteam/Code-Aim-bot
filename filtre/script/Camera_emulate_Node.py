@@ -27,9 +27,9 @@ def talker():
     angle = -10
     rospy.init_node('Camera_emulate', anonymous=True)
   #  rospy.loginfo('Camera_emulate started')
-    rate = rospy.Rate(100)
+    rate = rospy.Rate(0.5)
     while not rospy.is_shutdown():
-        if xpos >3.4:
+        if xpos >3:
             xpos = 0.1
         else:
             xpos += 0.1
@@ -41,7 +41,6 @@ def talker():
         rate.sleep()
 
         
-
 if __name__ == '__main__':
     try:
         talker()

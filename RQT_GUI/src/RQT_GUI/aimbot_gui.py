@@ -25,7 +25,7 @@ class AimBotWidget(QtWidgets.QWidget):
         self.main = main
 
         self.CUP_POS.display(0)
-        self.Manual_control_check.stateChanged[int].connect(self.update_mode)
+        self.Mode.currentIndexChanged[int].connect(self.update_mode)
         self.Launch_manual.pressed.connect(self.launch_start)   #launch in Manual tab
         self.Launch_Aimbot.pressed.connect(self.launch_start)   #launch in Aimbot tab
         self.Launch_manual.released.connect(self.launch_stop)   #launch in Manual tab
@@ -43,10 +43,11 @@ class AimBotWidget(QtWidgets.QWidget):
         self.kpPan.valueChanged[float].connect(self.update_kpPan)
         self.kiPan.valueChanged[float].connect(self.update_kiPan)
         self.kdPan.valueChanged[float].connect(self.update_kdPan)
+        self.glass_height.valueChanged[float].connect(self.update_height)
         
     def update_cup_pos(self, msg):
-        cup_pos = round(msg.cup_distance,3)
-        cup_angle = round(msg.cup_angle,3)
+        cup_pos = round(msg.cup_distance,2)
+        cup_angle = round(msg.cup_angle,2)
         self.CUP_POS.display(str(cup_pos))
         self.CUP_POS_ANGLE.display(str(cup_angle))
 
@@ -98,3 +99,5 @@ class AimBotWidget(QtWidgets.QWidget):
     def update_kdPan(self, value):
         self.main.update_kdPan(value)
 
+    def update_height(self, value):
+        self.main.update_height(value)
