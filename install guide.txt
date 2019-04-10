@@ -1,21 +1,29 @@
 *************************************
 Projet s4 - GRO - H19
-Last update:2019/02/23 - 14h03
+Last update:2019/04/10 - 15:54
 
 **************************************
 List of material:
 -raspberty pi (3 or 3b+)
--Kinect (version)
--open cr card (link)
--pololu drive (#model)
--pololo motor (#model)
+-Kinect (Xbox 360)
+-openCR card (http://emanual.robotis.com/docs/en/parts/controller/opencr10/)
+-Cytron drive (MD10C R3)
+-pololu motor (9.7:1 - 25Dx48L)
+-Dynamixel motor (XL430-W250-T)
+-Dynamixel motor (XM430-W350-T)
+-Hitec motor (HS-422 Servo)
 *************************************
 SETUP the hardware
--mecanical parts**
-(link to the schema)
--plug the motor to the drive
--plug the drive to the opencr card
--plug the openCR card to the rasbberry
+-Mechanical assembly and parts are available under Hardware-Aim-bot repository
+-Wiring diagram can be found under Code-Aim-bot/Electronics
+-Follow the wiring diagram and:
+	-plug the pololu motor to the cytron drive
+	-plug the drive to the openCR card
+	-plug the 2 dynamixel in the openCR card
+	-plug the Hitec servo-motor to the openCR card
+	-Connect the openCR card and the raspberry Pi together with USB
+	-plug the kinect using USB and it's own power supply to the raspberry Pi
+	-Power up the kinect, raspberry Pi and the OpenCR card
 *************************************
 
 
