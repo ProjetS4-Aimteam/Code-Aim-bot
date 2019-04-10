@@ -17,17 +17,18 @@ import numpy as np
 
 # Constant
 R = 0.054
-MAX_SPEED = 100*R # Maximum motor speed, rad/s equivalent of 960 rpm motor
+MAX_SPEED = 108*R # Maximum motor speed, rad/s equivalent of 960 rpm motor
 MAX_ITERATION = 100
 THETA_MIN = 0.5236 # Minimum launch angle, equivalent of 30 deg
-THETA_45 = 0.785398163 # Angle rad equivalent of 45 deg (max shooting range)
+THETA_55 = 0.959931088 # Angle rad equivalent of 55 deg (max shooting range)
 THETA_INI = 1.0472  # Initial launch angle, equivalent of 60 deg
-THETA_MAX = 1.396 # Maximum launch angle, equivalent of 80 deg
+THETA_MAX = 1.309 # Maximum launch angle, equivalent of 80 deg
 Cd = 0.47       # Ball's coefficient of drag
 Rho = 1.1123    # kg/m^3, Air density in Sherbrooke, 25C
 G = 9.806       # m/s^2, Gravitational acceleration
 Rb = 0.02       # m, Ball's radius
 Mb = 0.0027     # Kg, Ball's weight
+DISTANCE_OFFSET = 1.35 # 135% of real distance
 # Parameter
 Yi = 0.3        # m, Distance between Launcher and top of the glass
 
@@ -85,7 +86,7 @@ def NR_Dyn_vi(x,theta):
 
 def limited_Dynamic(x):
     
-    theta = THETA_45
+    theta = THETA_55
     
     speed_max = NR_Dyn_vi(x,theta)
     if(speed_max > 0.85 * MAX_SPEED):
@@ -119,16 +120,16 @@ def send_msg(ini_speed,theta):
     
 def callback(msg):
     if(Mode == 0):
-        pos = msg.cup_distance
+        pos = msg.cup_distance * DISTANCE_OFFSET
         ini_spd, theta = limited_Dynamic(pos)
-        rospy.loginfo(theta)
-        rospy.loginfo(ini_spd/R)
+        #rospy.loginfo(theta)
+        #rospy.loginfo(ini_spd/R)
         send_msg(ini_spd/R,theta)
     else:
-        pos = msg.cup_distance
+        pos = msg.cup_distance * DISTANCE_OFFSET
         ini_spd, theta = limited_Dynamic(pos)
-        rospy.loginfo(theta)
-        rospy.loginfo(ini_spd/R)
+        #rospy.loginfo(theta)
+        #rospy.loginfo(ini_spd/R)
         
 def callback_height(msg):
     Yi = msg.data
