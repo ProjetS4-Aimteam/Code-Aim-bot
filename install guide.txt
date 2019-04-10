@@ -66,13 +66,11 @@ SETUP the hardware
 	4.2 - Open a terminal from this place and clone the git rep
 		"git clone -b Develop https://github.com/ProjetS4-Aimteam/Code-Aim-bot.git"
 		
-5 - Move the foler opencv-3.3.1-dev from "/catkin_ws/src/Code-Aim-bot" to "/opt/ros/kinetic/include"
-
-6 - Catkin_make
+5 - Catkin_make
 	6.1 - cd into your catkin_ws folder
 	6.1 - Execute the command "catkin_make"
 
-7 - Start all
+6 - Start all
 	5.1 - Go to "catkin_ws" folder and source your workspace
 		"source devel/setup.bash
 	5.2 - run the launch file
