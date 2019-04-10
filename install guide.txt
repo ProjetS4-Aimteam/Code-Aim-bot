@@ -19,7 +19,7 @@ SETUP the hardware
 *************************************
 
 
-*****start of the ROS step********
+***** Installation guide ********************************************************************
 
 1- install Ros on a raspbery pi
 
@@ -50,8 +50,6 @@ SETUP the hardware
 	3.4 - install rosserial
 		"sudo apt-get install ros-kinetic-rosserial"
 		
-	3.5 - install pyqtgraph
-		"pip install python-pyqtgraph"
 
 
 4 - Clone the git project
@@ -72,7 +70,65 @@ SETUP the hardware
 	5.2 - run the launch file
 		"roslaunch filtre filtre.launch"
 
-*****end of the ROS step********
-		
+************** USER GUIDE *************************************************************
+At this point, the robot should be plugged in and you should be connected to your raspberry pi via HDMI or VNC*
 
+1 - Preparation for start command
+	1.1 Open lxterminal in the start menu under System Tools
+	1.2 Click on "File" and then " + New Tab"
+	1.3 Go back to the first Tab
 	
+2 - Start the  system
+	("" = To write as a command line)
+	
+	2.1 - move to catkin workspace 
+		"cd catkin_ws/"
+	2.2 - Start the main packgage
+		"roslaunch filtre filtre.launch"
+	
+	2.3 Start the user Interface
+		Switch to the other tab opened on step 1.2 of the user guide
+		"rqt -s RQT_GUI.aimbot_gui_plugin.AimBotPugin"
+		
+3 - Mode Selection
+	
+	3.1 - Move to the 'Manual Control' Tab
+	
+	3.2 - From the drop menu on the top left, select the desired mode
+		3.2.1 - STOP : You can move the Tilt and Pan angle but the launching wheels won't move
+		3.2.2 - MANUAL : You can move the Tilt and Pan angle and start the launching wheels
+		3.2.3 - AUTO : The robot will detect the next target and get ready to aim for it
+		
+4 - Automatic Mode
+
+	4.1 - Calculate the distance in height between the top of the glass used and the flat base where the balls are launch from.
+		(Typically it should be close to 0.07 m)
+		
+	4.2 - Follow the instruction under (3 - Mode Selection) and select AUTO.
+			The Robot will start adjusting to aim for the first glass in sight.
+			
+	4.3 - When the target is aquired, click on 'LAUNCH' to destroy your opponent!
+		
+5 - Manual mode
+	
+	5.1 To change the Tilt angle, simply change the Tilt_angle value in the Manual Control window
+		Min: 0, Max: 75
+	
+	5.2 To change the Pan angle, simply change the Pan_angle value in the Manual Control window
+		Min : -10, Max: 10
+	
+	5.3 To change the launcher speed, simply change the Motor_speed value in the Manual Control window
+		Min : 0, Max : 108
+	
+	5.4 To active the ball distributor, click on 'LAUNCH'
+	
+6 - PID
+	
+	- It's recommanded to keep the values as they are as standard but they can be adjusted simply by changing the value in the 		  desired field. 
+	
+	- STANDARD VALUEs:
+		- SPEED : KP = 1.50, KI = 0.5, KD = 0.0
+	
+***** END ************************************************
+
+* To use VNC and be wireless -> https://www.realvnc.com/en/connect/download/viewer/ 
