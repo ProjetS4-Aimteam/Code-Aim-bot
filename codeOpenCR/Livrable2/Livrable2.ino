@@ -8,7 +8,7 @@
 Servo myservo;  // create servo object to control a servo
 
 //Definition des pins
-const byte pinPWMMot = 5;
+const byte pinPWMMot = 6;
 const byte pinDirMot = 7;
 const byte encoderA = 2;
 const byte encoderB = 3;
@@ -29,8 +29,8 @@ int mode =0;
 bool launch = false;
 //=================================================================================
 //============Valeur pour le controlleur PID=======================================
-float KpSpeed = 0.4;
-float KiSpeed = .02;
+float KpSpeed = 0.5;
+float KiSpeed = 0.2;
 float KdSpeed = 0;
 float lastErrSpeed = 0;
 
@@ -41,6 +41,11 @@ float minI = 0;
 float maxI = 100;
 
 float actualSpeed = 0;
+float lastSpeed =0;
+
+int cmdMot = 0;
+
+float error = 0;
 
 //=================================================================================
 //=================================================================================
@@ -83,16 +88,18 @@ filtre::fromOpenCR toRPI;
 ros::Publisher fromOpenCR("fromOpenCR", &toRPI);
 
 void publishToRPI(){
+//Envoyer au RPI via topic "fromOpenCR"
+  toRPI.actKp = KpSpeed;
+  toRPI.actKi = KiSpeed;
+  toRPI.actKd = KdSpeed;
+  toRPI.actSpd = actualSpeed;
 
-toRPI.actKp = KpSpeed;
-toRPI.actKi = KiSpeed;
-toRPI.actKd = KdSpeed;
-toRPI.actSpd = actualSpeed;
 fromOpenCR.publish(&toRPI);
 }
 
 
  void subToRPI_cb(const filtre::toOpenCR &fromRPI){
+  //Recoit les données du RPI
     KpSpeed = fromRPI.kpSpeed;
     KiSpeed = fromRPI.kiSpeed;
     KdSpeed = fromRPI.kdSpeed;
@@ -102,11 +109,13 @@ fromOpenCR.publish(&toRPI);
     KpPan = fromRPI.kpPan;
     KiPan = fromRPI.kiPan;
     KdPan = fromRPI.kdPan;
+    setPoint = fromRPI.ini_spd;
     mode = fromRPI.mode;
     launch = fromRPI.launch;
-    setPoint = fromRPI.ini_spd;
-    goalPan = fromRPI.pan_angle;
+
     goalTilt = fromRPI.tilt_angle;
+    goalPan = fromRPI.pan_angle;
+    
   
  }
 
@@ -118,7 +127,7 @@ fromOpenCR.publish(&toRPI);
 //=================================================================================
 
 
-
+//Fonction d'interruption pour lire les pulses d'encodeur
 inline void encoderPulseA(void){
   countPulseA ++;
 }
@@ -127,12 +136,11 @@ inline void encoderPulseB(void){
   countPulseB ++;
 }
 
+
 int getEncoderCount(void){
   int pulse =0;
 
   pulse = countPulseA + countPulseB;
-  //countPulseA =0;
-  //countPulseB =0;
   
   return(pulse);
 }
@@ -157,9 +165,9 @@ float speedController(){
   /* les valeurs de SP, PV et CO sont tous converti en pourcentage afin d'avoir des unité de base commune pour le controle.
    * le CO est converti de pourcentage vers puissance moteur .
    */
-  float cmdMot = 0.0;
-  float error = 0;
+  
 
+  float setPointPID;
   float setPointPourc;
   float actualSpeedPourc;
 
@@ -167,15 +175,21 @@ float speedController(){
   float I_;
   float D_;
 
-  setPoint = setPoint * 60 / (2*3.1416);
+  setPointPID = setPoint;
+
+  setPointPID = setPointPID * 60 / (2*3.1416);
   
-  setPointPourc = map(setPoint, 1030 , 0, 100 ,0);
-  actualSpeedPourc = map(actualSpeed, 1030 , 0, 100 ,0);
+  setPointPourc = map(setPointPID, 0 , 1030, 0 ,100);
+  actualSpeedPourc = map(actualSpeed, 0 , 1030, 0 ,100);
+
+  
   
   error = setPointPourc - actualSpeedPourc;
 
   P_ = error * KpSpeed;
   errISpeed += error;
+  errISpeed = constrain(errISpeed,-100, 100);
+  //errISpeed = constrain(errISpeed,-1030, 1030);
   I_ = errISpeed * KiSpeed;
 
   if (I_ > maxI) 
@@ -189,13 +203,13 @@ float speedController(){
   cmdMot = P_ + I_ + D_;
   lastErrSpeed = error;
 
-  cmdMot = map(cmdMot, 100 , 0 , 255, 0);
+  cmdMot = map(cmdMot, 0 , 100 , 0, 255);
 
 
 
  //On s'assure que la commande ne depasse pas les valeurs extremes   
-  if(cmdMot < -255)
-    cmdMot = -255;
+  if(cmdMot < 0)
+    cmdMot = 0;
 
   if(cmdMot > 255)
     cmdMot = 255;
@@ -207,16 +221,20 @@ float speedController(){
 void feedBall() {
   int pos;
 
-  for(pos = 0; pos <= 50; pos += 1) // goes from 0 degrees to 180 degrees 
-  {                                  // in steps of 1 degree 
-    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
-    delay(10);                       // waits 15ms for the servo to reach the position 
-  } 
   for(pos = 50; pos>=0; pos-=1)     // goes from 180 degrees to 0 degrees 
   {                                
     myservo.write(pos);              // tell servo to go to position in variable 'pos' 
     delay(15);                       // waits 15ms for the servo to reach the position 
   } 
+
+  delay(50);
+  
+  for(pos = 0; pos <= 50; pos += 1) // goes from 0 degrees to 180 degrees 
+  {                                  // in steps of 1 degree 
+    myservo.write(pos);              // tell servo to go to position in variable 'pos' 
+    delay(10);                       // waits 15ms for the servo to reach the position 
+  } 
+
   delay(1000);
 }
 
@@ -225,10 +243,22 @@ void updateTiltAngle(){
   goal = map(goalTilt, 0, 360, 0, 4095);
   goal = goal*tiltGearRatio; //Apply gear ratio
 
-  if(goal > 2400){
-    goal = 2400;
+  if(goal > 3498){
+    goal = 3498;
   }
   dxl_wb.goalPosition(IDTilt, (int32_t)goal, &empty);
+  
+}
+
+void updatePanAngle(){
+  float goal;
+  goal = map(goalPan, -10, 350, 0, 4095);
+  //goal = goal*tiltGearRatio; //Apply gear ratio
+
+  if(goal > 319){
+    goal = 319;
+  }
+  dxl_wb.goalPosition(IDPan, (int32_t)goal, &empty);
   
 }
 
@@ -241,6 +271,7 @@ void setup() {
 //while(!Serial);
 
 //================ROS=====================
+  nh.getHardware()->setBaud(115200);
   nh.initNode();
   nh.advertise(fromOpenCR);
   nh.subscribe(sub);
@@ -270,8 +301,10 @@ void setup() {
   pinMode(encoderA, INPUT);
   pinMode(encoderB, INPUT);
   pinMode(pinDirMot, OUTPUT);
+  pinMode(pinPWMMot, OUTPUT);
 
   myservo.attach(pinServo);  // attaches the servo on GIO2 to the servo object 
+  myservo.write(50);
 
   attachInterrupt(digitalPinToInterrupt(encoderA),encoderPulseA, RISING);
   attachInterrupt(digitalPinToInterrupt(encoderB),encoderPulseB, RISING);
@@ -284,12 +317,16 @@ void loop() {
  
  actualTime = millis();
 
-
  updateTiltAngle();
- dxl_wb.goalPosition(IDPan, (int32_t)goalPan, &empty);
+ updatePanAngle();
  //Serial.println(empty);
 
  actualSpeed = getMotorSpeed();
+
+ if(actualSpeed > 1030){
+  actualSpeed = lastSpeed;
+ }
+ 
  speedController();
 
  if(digitalRead(obSwitch1) or launch){
@@ -298,9 +335,11 @@ void loop() {
 
  
  lastTime = actualTime;
+ lastSpeed = actualSpeed;
 
  publishToRPI();
  nh.spinOnce();
+ 
  delay(50);
 
 }
